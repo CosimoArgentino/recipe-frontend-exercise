@@ -18,10 +18,3 @@ function App() {
 }
 
 export default App;
-
-
-/*
-<Route path="/new" component={RecipeCreate} />
-          <Route path="/edit/:id" component={RecipeEdit} />
-          <Route component={NotFound} />
-          */

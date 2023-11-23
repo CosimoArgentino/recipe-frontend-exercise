@@ -1,14 +1,17 @@
 import { Box, TextField } from "@mui/material";
-import { useState } from "react";
+import React, { useState } from "react";
 import { RecipeModel } from "./RecipeModel";
 import { IngredientModel } from "../ingridient/IngredientModel";
+import { RecipeContext } from "../Context";
 
 export default function NewEditRecipeForm({propRecipe}:{propRecipe:RecipeModel}) {
 
-    const[recipe, setRecipe] = useState<RecipeModel>(propRecipe);
-    const[name, setName] = useState<string>(propRecipe?.name);
-    const[description, setDescription] = useState<string>(propRecipe?.description);
-    const[ingredients, setIngredients] = useState<IngredientModel[]>(propRecipe?.ingredients);
+    const recipeCon:RecipeModel = React.useContext(RecipeContext);
+
+    const[recipe, setRecipe] = useState<RecipeModel>(recipeCon);
+    const[name, setName] = useState<string>(recipe?.name);
+    const[description, setDescription] = useState<string>(recipe?.description);
+    const[ingredients, setIngredients] = useState<IngredientModel[]>(recipe?.ingredients);
 
     
     return (
