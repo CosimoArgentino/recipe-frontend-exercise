@@ -3,12 +3,12 @@ import { useState } from "react";
 import { RecipeModel } from "./RecipeModel";
 import { IngredientModel } from "../ingridient/IngredientModel";
 
-export default function NewRecipe({propRecipe}:{propRecipe:RecipeModel}) {
+export default function NewEditRecipeForm({propRecipe}:{propRecipe:RecipeModel}) {
 
     const[recipe, setRecipe] = useState<RecipeModel>(propRecipe);
-    const[name, setName] = useState<string>(propRecipe.name);
-    const[description, setDescription] = useState<string>(propRecipe.description);
-    const[ingredients, setIngredients] = useState<IngredientModel[]>(propRecipe.ingredients);
+    const[name, setName] = useState<string>(propRecipe?.name);
+    const[description, setDescription] = useState<string>(propRecipe?.description);
+    const[ingredients, setIngredients] = useState<IngredientModel[]>(propRecipe?.ingredients);
 
     
     return (

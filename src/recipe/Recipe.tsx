@@ -5,16 +5,19 @@ import { Card, CardHeader, Avatar, IconButton, CardContent, CardActions, Button 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
+import { useHistory } from "react-router-dom";
 
 export default function Recipe({propRecipe}:{propRecipe:RecipeModel}) {
   const [recipe, setRecipe] = useState<RecipeModel>(propRecipe);
+
+  let history = useHistory();
 
   const onDelete = (recipe:RecipeModel) => {
 
   }
 
   const onEdit = (recipe:RecipeModel) => {
-
+    history.push(`/edit/${recipe.id}`, recipe)
   }
 
   return (

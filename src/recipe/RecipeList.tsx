@@ -58,6 +58,8 @@ export default function RecipeList() {
 
     const[recipes,setRecipes] = useState<RecipeModel[]>([]);
 
+    let history = useHistory();
+
     useEffect(() => {
        fetchData();
     }, []);
@@ -76,7 +78,7 @@ export default function RecipeList() {
     }
 
     const addRecipe = () => {
-
+        history.push(`/new`);
     }
 
     if(!recipes){
@@ -90,6 +92,9 @@ export default function RecipeList() {
                 <span />
                 <Button onClick={addRecipe}>Add recipe</Button>
             </ButtonGroup>
+            <br />
+            <br />
+            <br />
             <div style={{display: 'flex'}}>
                 {recipes.map((r) => {
                     return <Recipe key={`recipe-${r.id}`} propRecipe={r}/>
