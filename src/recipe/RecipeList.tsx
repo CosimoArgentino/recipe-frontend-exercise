@@ -1,5 +1,5 @@
 import {ButtonGroup, Button} from '@mui/material'
-import { Ingredient } from '../ingridient/IngredientModel';
+import { IngredientModel } from '../ingridient/IngredientModel';
 import { RecipeModel } from './RecipeModel';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState, useLayoutEffect } from 'react';
@@ -7,7 +7,7 @@ import Recipe from './Recipe';
 import { v4 as uuidv4 } from 'uuid';
 
 function randomIngridient(){
-    let ingredient:Ingredient[] = [];
+    let ingredient:IngredientModel[] = [];
     for(let i=0;i<10;i++){
         ingredient.push({
             name: "boh"
@@ -17,7 +17,7 @@ function randomIngridient(){
 }
 
 function randomIngridients(){
-    let ingredient:Ingredient[] = [];
+    let ingredient:IngredientModel[] = [];
     for(let i=0;i<10;i++){
         ingredient.push({
             name: "asd"

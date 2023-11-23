@@ -1,8 +1,8 @@
-import { Ingredient } from "../ingridient/IngredientModel"
+import { IngredientModel } from "../ingridient/IngredientModel"
 
 export type RecipeModel = {
     id: string,
     name: string,
     description: string,
-    ingredients: Ingredient[]
+    ingredients: IngredientModel[]
 }

@@ -1,7 +1,7 @@
 import { RecipeModel } from './RecipeModel';
-import { Ingredient } from '../ingridient/IngredientModel';
+import { IngredientModel } from '../ingridient/IngredientModel';
 import React, {useState, useEffect} from 'react';
-import { Card, CardHeader, Avatar, IconButton, CardContent } from '@mui/material';
+import { Card, CardHeader, Avatar, IconButton, CardContent, CardActions, Button } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
@@ -9,20 +9,18 @@ import { red } from '@mui/material/colors';
 export default function Recipe({propRecipe}:{propRecipe:RecipeModel}) {
   const [recipe, setRecipe] = useState<RecipeModel>(propRecipe);
 
+  const onDelete = (recipe:RecipeModel) => {
+
+  }
+
+  const onEdit = (recipe:RecipeModel) => {
+
+  }
+
   return (
     <>
       <Card>
         <CardHeader
-          avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              R
-            </Avatar>
-          }
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          }
           title={recipe.name}
         />
         <CardContent>
@@ -30,6 +28,14 @@ export default function Recipe({propRecipe}:{propRecipe:RecipeModel}) {
             {recipe.ingredients.map((i) => {return i.name})}
           </Typography>
       </CardContent>
+      <CardActions>
+        <Button size="small" color="primary" onClick={() => {onEdit(recipe)}}>
+          Edit
+        </Button>
+        <Button size="small" color="primary" onClick={() => {onDelete(recipe)}}>
+          Delete
+        </Button>
+      </CardActions>
       </Card>
     </>
   );
