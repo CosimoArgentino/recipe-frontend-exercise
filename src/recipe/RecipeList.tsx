@@ -90,10 +90,11 @@ export default function RecipeList() {
                 <span />
                 <Button onClick={addRecipe}>Add recipe</Button>
             </ButtonGroup>
-            {recipes.map((r) => {
-                return <Recipe key={`recipe-${r.id}`} propRecipe={r}/>
-            })}
-        
+            <div style={{display: 'flex'}}>
+                {recipes.map((r) => {
+                    return <Recipe key={`recipe-${r.id}`} propRecipe={r}/>
+                })}
+            </div>
         </>
     );
 }
