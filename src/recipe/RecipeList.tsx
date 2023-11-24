@@ -78,7 +78,15 @@ export default function RecipeList() {
     }
 
     const addRecipe = () => {
-        history.push(`/new`);
+        history.push({
+            pathname: `/new`,
+            state: {
+                id: '',
+                name: '',
+                description: '',
+                ingredients: [],
+            } as RecipeModel
+        });
     }
 
     if(!recipes){

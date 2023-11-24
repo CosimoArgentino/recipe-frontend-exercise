@@ -4,7 +4,7 @@ import { RecipeModel } from "./RecipeModel";
 import { IngredientModel } from "../ingridient/IngredientModel";
 import { useLocation } from "react-router-dom";
 
-export default function NewEditRecipeForm({props}:{props:any}) {
+export default function NewEditRecipeForm() {
 
     const location = useLocation();
 
