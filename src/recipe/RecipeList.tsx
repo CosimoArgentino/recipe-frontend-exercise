@@ -71,7 +71,6 @@ export default function RecipeList() {
 
     const loadRecipe = () => {
         let rRecipes = randomRecipess();
-        debugger;
         let oldRecipes = [...recipes];
         oldRecipes = rRecipes;
         setRecipes(oldRecipes);

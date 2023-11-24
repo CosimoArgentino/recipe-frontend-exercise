@@ -1,8 +1,8 @@
 import { IngredientModel } from "../ingridient/IngredientModel"
 
 export type RecipeModel = {
-    id: string,
-    name: string,
-    description: string,
-    ingredients: IngredientModel[]
+    id:string | undefined,
+    name:string,
+    description:string,
+    ingredients:IngredientModel[]
 }
