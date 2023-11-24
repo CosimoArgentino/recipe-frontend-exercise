@@ -17,7 +17,11 @@ export default function Recipe({propRecipe}:{propRecipe:RecipeModel}) {
   }
 
   const onEdit = (recipe:RecipeModel) => {
-    history.push(`/edit/${recipe.id}`, recipe)
+    history.push({
+      pathname:`/edit/${recipe.id}`, 
+      state: recipe
+      }
+    )
   }
 
   return (
