@@ -6,22 +6,16 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import { useHistory } from "react-router-dom";
+import { Modal } from '@mui/base';
+import RecipeForm from './RecipeForm';
 
-export default function Recipe({propRecipe}:{propRecipe:RecipeModel}) {
+export default function Recipe({propRecipe, onEdit, onDelete}:{propRecipe:RecipeModel, onEdit:(recipe:RecipeModel)=>void, onDelete:(recipe:RecipeModel)=>void}) {
   const [recipe, setRecipe] = useState<RecipeModel>(propRecipe);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  let history = useHistory();
-
-  const onDelete = (recipe:RecipeModel) => {
-
-  }
-
-  const onEdit = (recipe:RecipeModel) => {
-    history.push({
-      pathname:`/edit/${recipe.id}`, 
-      state: recipe
-      }
-    )
+  const onCloseModal = (r:RecipeModel) => {
+    onEdit(r);
+    setIsModalOpen(false);
   }
 
   return (
@@ -44,6 +38,12 @@ export default function Recipe({propRecipe}:{propRecipe:RecipeModel}) {
         </Button>
       </CardActions>
       </Card>
+      <Modal
+        open={isModalOpen}
+        onClose={onCloseModal}
+        >
+        <RecipeForm pRecipe={recipe} onSaveForm={onCloseModal} />
+      </Modal>
     </>
   );
 };
