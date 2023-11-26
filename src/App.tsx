@@ -1,8 +1,8 @@
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import RecipeList from './recipe/RecipeList';
-import NewRecipeWrapper from './recipe/NewRecipeWrapper';
-import EditRecipeWrapper from './recipe/EditRecipeWrapper';
+import RecipeList from './recipe/hooks/RecipeList';
+import NewRecipeWrapper from './recipe/hooks/NewRecipeWrapper';
+import EditRecipeWrapper from './recipe/hooks/EditRecipeWrapper';
 
 function App() {
   return (

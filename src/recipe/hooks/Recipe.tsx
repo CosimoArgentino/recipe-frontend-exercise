@@ -1,5 +1,5 @@
-import { RecipeModel } from './RecipeModel';
-import { IngredientModel } from '../ingridient/IngredientModel';
+import { RecipeModel } from '../model/RecipeModel';
+import { IngredientModel } from '../../ingridient/model/IngredientModel';
 import React, {useState, useEffect} from 'react';
 import { Card, CardHeader, Avatar, IconButton, CardContent, CardActions, Button } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';

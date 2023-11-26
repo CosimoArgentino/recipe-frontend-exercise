@@ -1,7 +1,7 @@
 import { Box, TextField } from "@mui/material";
 import React, { useState } from "react";
-import { RecipeModel } from "./RecipeModel";
-import { IngredientModel } from "../ingridient/IngredientModel";
+import { RecipeModel } from "../model/RecipeModel";
+import { IngredientModel } from "../../ingridient/model/IngredientModel";
 import { useHistory, useLocation } from "react-router-dom";
 
 export default function RecipeForm({pRecipe, onSaveForm}:{pRecipe:RecipeModel, onSaveForm:(recipe:RecipeModel)=>void}) {
@@ -9,13 +9,13 @@ export default function RecipeForm({pRecipe, onSaveForm}:{pRecipe:RecipeModel, o
     const history = useHistory();
 
     const[recipe, setRecipe] = useState<RecipeModel>(pRecipe);
-    const[name, setName] = useState<string>(recipe?.name);
-    const[description, setDescription] = useState<string>(recipe?.description);
-    const[ingredients, setIngredients] = useState<IngredientModel[]>(recipe?.ingredients);
+    const[name, setName] = useState<string>(recipe.name ? recipe.name : '');
+    const[description, setDescription] = useState<string>(recipe.description ? recipe.description : '');
+    const[ingredients, setIngredients] = useState<IngredientModel[]>(recipe.ingredients ? recipe.ingredients : []);
 
     const onSave = () => {
       let r:RecipeModel = {
-        id: undefined,
+        id: recipe.id ? recipe.id : undefined,
         name: name,
         description: description,
         ingredients: ingredients,

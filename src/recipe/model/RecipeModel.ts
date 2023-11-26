@@ -1,4 +1,4 @@
-import { IngredientModel } from "../ingridient/IngredientModel"
+import { IngredientModel } from "../../ingridient/model/IngredientModel"
 
 export type RecipeModel = {
     id:string | undefined,
