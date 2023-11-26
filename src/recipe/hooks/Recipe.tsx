@@ -1,22 +1,27 @@
 import { RecipeModel } from '../model/RecipeModel';
-import { IngredientModel } from '../../ingridient/model/IngredientModel';
-import React, {useState, useEffect} from 'react';
-import { Card, CardHeader, Avatar, IconButton, CardContent, CardActions, Button } from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import {useState, useEffect} from 'react';
+import { Card, CardHeader, CardContent, CardActions, Button, Modal, Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import { useHistory } from "react-router-dom";
-import { Modal } from '@mui/base';
 import RecipeForm from './RecipeForm';
+import { style } from './style';
 
-export default function Recipe({propRecipe, onEdit, onDelete}:{propRecipe:RecipeModel, onEdit:(recipe:RecipeModel)=>void, onDelete:(recipe:RecipeModel)=>void}) {
+export default function Recipe({propRecipe, onEdit, onDelete}:{propRecipe:RecipeModel, onEdit:(recipe:RecipeModel)=>void, onDelete:(id:string)=>void}) {
   const [recipe, setRecipe] = useState<RecipeModel>(propRecipe);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const onCloseModal = (r:RecipeModel) => {
-    onEdit(r);
-    setIsModalOpen(false);
+  useEffect(() => {
+    setRecipe(propRecipe);
+  })
+
+  const onEditClick = () => {
+    setIsModalOpen(true);
   }
+
+  const onSaveClick = (recipe:RecipeModel) => {
+    setIsModalOpen(false);
+    onEdit(recipe);
+  }
+  
 
   return (
     <>
@@ -26,23 +31,26 @@ export default function Recipe({propRecipe, onEdit, onDelete}:{propRecipe:Recipe
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            {recipe.ingredients.map((i) => {return i.name})}
+            {recipe.ingredients.map((i) => {return `${i.name},`})}
           </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="primary" onClick={() => {onEdit(recipe)}}>
+        <Button size="small" color="primary" onClick={onEditClick}>
           Edit
         </Button>
-        <Button size="small" color="primary" onClick={() => {onDelete(recipe)}}>
+        <Button size="small" color="primary" onClick={() => {onDelete(recipe.id)}}>
           Delete
         </Button>
       </CardActions>
       </Card>
       <Modal
         open={isModalOpen}
-        onClose={onCloseModal}
-        >
-        <RecipeForm pRecipe={recipe} onSaveForm={onCloseModal} />
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <RecipeForm pRecipe={recipe} onSaveForm={onSaveClick} />
+        </Box>
       </Modal>
     </>
   );

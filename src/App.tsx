@@ -7,14 +7,9 @@ import { useState } from 'react';
 import { RecipesContext, RecipesMap } from './RecipeContext';
 
 function App() {
-  const [recipes, setRecipes] = useState<RecipesMap>(new Map());
-
   return (
     <>
-      <RecipesContext.Provider value={{ recipes, setRecipes}}>
-        <RecipeList />
-
-      </RecipesContext.Provider>
+     <RecipeList />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import {ButtonGroup, Button} from '@mui/material'
+import {ButtonGroup, Button, Box} from '@mui/material'
 import { RecipeModel } from '../model/RecipeModel';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
@@ -6,6 +6,7 @@ import Recipe from './Recipe';
 import axios from 'axios';
 import { Modal } from '@mui/base';
 import RecipeForm from './RecipeForm';
+import { style } from './style';
 export default function RecipeList() {
 
     type RecipesMap = Record<string, RecipeModel>;
@@ -16,9 +17,8 @@ export default function RecipeList() {
     });
 
     const[recipes, setRecipes] = useState<RecipesMap>({});
+    const[recipe, setRecipe] = useState<RecipeModel>({name:'', description:'', ingredients:[], id:''});
     const[isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-    let history = useHistory();
 
     const fetchData = async () =>{
         const response = await axiosClient.get('/recipes/')
@@ -31,18 +31,21 @@ export default function RecipeList() {
         setRecipes(recipesMap);
     }
 
-    const onDelete = (recipe:RecipeModel) => {
-        
+    const onDelete = async (id:string) => {
+        const response = await axiosClient.delete(`/recipes/${id}`);
+        const { [id]: deletedRecipe, ...remainingRecipes } = recipes;
+        setRecipes(remainingRecipes);
     }
 
     const onSave = async (recipe:RecipeModel) => {
+        setIsModalOpen(false);
         const response = await axiosClient.post(`/recipes/`, recipe);
         const newRecipe = response.data as RecipeModel;
         setRecipes({ ...recipes, [newRecipe.id]: newRecipe });
     }
   
-    const onEdit = async (recipe:RecipeModel) => {
-        const response = await axiosClient.put(`/recipes/${recipe.id}`, recipe);
+    const onEditClickHandler = async (recipe:RecipeModel) => {
+        const response = await axiosClient.put(`/recipes/${recipe.id}/`, recipe);
         const editedRecipe = response.data as RecipeModel;
         setRecipes({ ...recipes, [recipe.id]: editedRecipe });
     }
@@ -67,15 +70,20 @@ export default function RecipeList() {
             <br />
             <div style={{display: 'flex'}}>
                 {Object.values(recipes).map((r) => {
-                    return <Recipe key={`recipe-${r.id}`} propRecipe={r} onDelete={onDelete} onEdit={onEdit}/>
+                    return <Recipe key={`recipe-${r.id}`} propRecipe={r} onDelete={onDelete} onEdit={onEditClickHandler}/>
                 })}
             </div>
+            <div>
             <Modal
                 open={isModalOpen}
-                onClose={onCloseModal}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
             >
-                <RecipeForm pRecipe={{name: '', description: '', id: '', ingredients: []}} onSaveForm={onSave} />
+                <Box sx={style}>
+                    <RecipeForm pRecipe={recipe} onSaveForm={onSave} />
+                </Box>
             </Modal>
+            </div>
         </>
     );
 }
