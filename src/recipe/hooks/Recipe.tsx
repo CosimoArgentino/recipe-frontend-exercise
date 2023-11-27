@@ -1,6 +1,6 @@
 import { RecipeModel } from '../model/RecipeModel';
 import {useState, useEffect} from 'react';
-import { Card, CardHeader, CardContent, CardActions, Button, Modal, Box } from '@mui/material';
+import { Card, CardHeader, CardContent, CardActions, Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { useHistory } from 'react-router-dom';
 import { RecipesOp } from '../crud/RecipeCrud';

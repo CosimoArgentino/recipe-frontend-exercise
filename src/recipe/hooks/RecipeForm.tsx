@@ -40,30 +40,30 @@ export default function RecipeForm({pRecipe, onSaveForm}:{pRecipe:RecipeModel, o
       <div>
         <TextField
           required
-          id="outlined-required"
-          label="Required"
+          label="Recipe name"
           defaultValue={name}
           onChange={(e)=>(setName(e.target.value))}
         />
         </div>
         <div>
         <TextField
-          id="outlined-disabled"
-          label="Disabled"
+          required
+          label="Description"
           defaultValue={description}
           onChange={(e)=>(setDescription(e.target.value))}
         />
         </div>
         <div>
         <TextField
-          id="outlined-password-input"
-          label="Ingredients"
+          required
+          label="Comma separeted ingredients"
           defaultValue={ingredientsString}
           onChange={(e) => {onChangeIngredients(e.target.value)}}
         />
         </div>
         <Button
           onClick={onSave}>
+            Save form
         </Button>
     </Box>
     )
