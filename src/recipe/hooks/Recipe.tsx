@@ -2,26 +2,15 @@ import { RecipeModel } from '../model/RecipeModel';
 import {useState, useEffect} from 'react';
 import { Card, CardHeader, CardContent, CardActions, Button, Modal, Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import RecipeForm from './RecipeForm';
-import { style } from './style';
+import { useHistory } from 'react-router-dom';
 
-export default function Recipe({propRecipe, onEdit, onDelete}:{propRecipe:RecipeModel, onEdit:(recipe:RecipeModel)=>void, onDelete:(id:string)=>void}) {
+export default function Recipe({propRecipe}:{propRecipe:RecipeModel}) {
   const [recipe, setRecipe] = useState<RecipeModel>(propRecipe);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const history = useHistory();
 
   useEffect(() => {
     setRecipe(propRecipe);
   })
-
-  const onEditClick = () => {
-    setIsModalOpen(true);
-  }
-
-  const onSaveClick = (recipe:RecipeModel) => {
-    setIsModalOpen(false);
-    onEdit(recipe);
-  }
-  
 
   return (
     <>
@@ -35,23 +24,14 @@ export default function Recipe({propRecipe, onEdit, onDelete}:{propRecipe:Recipe
           </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="primary" onClick={onEditClick}>
+        <Button size="small" color="primary" onClick={() => {history.push(`/edit/${recipe.id}/`)}}>
           Edit
         </Button>
-        <Button size="small" color="primary" onClick={() => {onDelete(recipe.id)}}>
+        <Button size="small" color="primary" onClick={() => {}}>
           Delete
         </Button>
       </CardActions>
       </Card>
-      <Modal
-        open={isModalOpen}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <RecipeForm pRecipe={recipe} onSaveForm={onSaveClick} />
-        </Box>
-      </Modal>
     </>
   );
 };

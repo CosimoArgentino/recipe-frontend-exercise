@@ -7,10 +7,20 @@ import { useState } from 'react';
 import { RecipesContext, RecipesMap } from './RecipeContext';
 
 function App() {
+  const[recipes, setRecipes] = useState<RecipesMap>({});
+
   return (
     <>
-     <RecipeList />
-    </>
+      <BrowserRouter>
+        <RecipesContext.Provider value={{ recipes, setRecipes }}>
+          <Switch>
+            <Route path="/" exact component={RecipeList} />
+            <Route path="/new" component={NewRecipeWrapper} />
+            <Route path="/edit/:id" component={EditRecipeWrapper} />
+          </Switch>
+        </RecipesContext.Provider>
+      </BrowserRouter>
+      </>
   );
 }
 

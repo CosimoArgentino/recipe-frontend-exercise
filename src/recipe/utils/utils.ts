@@ -1,8 +1,11 @@
-import axios from "axios";
+import { IngredientModel } from "../../ingridient/model/IngredientModel";
 
-export default function createAxiosClient() {
-    return axios.create({
-        baseURL: 'http://127.0.0.1:8000/api',
-        timeout: 5000
-    });
+export function createIngredientsFromString(ingredientsAsString:string){
+    let ingredients:IngredientModel[] = ingredientsAsString.split(',').map(i => {return {name: i.trim()}});
+    return ingredients;
+}
+
+export function ingredientsToString(ingredients:IngredientModel[]){
+    let ingredientsAsString:string = ingredients.map(ingredient => ingredient.name).join(', ');
+    return ingredientsAsString;
 }

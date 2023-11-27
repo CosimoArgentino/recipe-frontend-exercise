@@ -3,22 +3,28 @@ import { useState } from "react";
 import { RecipeModel } from "../model/RecipeModel";
 import { IngredientModel } from "../../ingridient/model/IngredientModel";
 import { Button } from "@mui/base";
+import { createIngredientsFromString, ingredientsToString } from "../utils/utils";
 
 export default function RecipeForm({pRecipe, onSaveForm}:{pRecipe:RecipeModel, onSaveForm:(recipe:RecipeModel)=>void}) {
     
     const[recipe, setRecipe] = useState<RecipeModel>(pRecipe);
-    const[name, setName] = useState<string>(recipe.name ? recipe.name : '');
-    const[description, setDescription] = useState<string>(recipe.description ? recipe.description : '');
-    const[ingredients, setIngredients] = useState<IngredientModel[]>(recipe.ingredients ? recipe.ingredients : []);
+    const[name, setName] = useState<string>(recipe.name);
+    const[description, setDescription] = useState<string>(recipe.description);
+    const[ingredientsString, setIngredientsString] = useState<string>(ingredientsToString(recipe.ingredients));
 
     const onSave = () => {
+      let ingredients:IngredientModel[] = createIngredientsFromString(ingredientsString);
       let r:RecipeModel = {
-        id: recipe.id ? recipe.id : '',
+        id: recipe.id,
         name: name,
         description: description,
         ingredients: ingredients,
       }
       onSaveForm(r);
+    }
+
+    const onChangeIngredients = (ingredientsAsString:string) => {
+      setIngredientsString(ingredientsAsString);
     }
 
     
@@ -42,7 +48,6 @@ export default function RecipeForm({pRecipe, onSaveForm}:{pRecipe:RecipeModel, o
         </div>
         <div>
         <TextField
-          disabled
           id="outlined-disabled"
           label="Disabled"
           defaultValue={description}
@@ -53,7 +58,8 @@ export default function RecipeForm({pRecipe, onSaveForm}:{pRecipe:RecipeModel, o
         <TextField
           id="outlined-password-input"
           label="Ingredients"
-          defaultValue={ingredients?.map((i) =>{return i.name})}
+          defaultValue={ingredientsString}
+          onChange={(e) => {onChangeIngredients(e.target.value)}}
         />
         </div>
         <Button
