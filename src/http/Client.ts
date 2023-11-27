@@ -5,8 +5,7 @@ const API_BASE_URL = process.env.REACT_APP_RECIPE_API_BASE_URL ?? 'http://127.0.
 
 export const CreateAxiosClient = (baseUrl: string) => {
     const http = axios.create({
-        baseURL: baseUrl,
-        timeout: 5000
+        baseURL: baseUrl
     });
 
     return {
