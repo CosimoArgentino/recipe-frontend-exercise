@@ -5,6 +5,7 @@ import NewRecipeWrapper from './recipe/hooks/NewRecipeWrapper';
 import EditRecipeWrapper from './recipe/hooks/EditRecipeWrapper';
 import { useState } from 'react';
 import { RecipesContext, RecipesMap } from './RecipeContext';
+import NotFound from './recipe/hooks/404notFound';
 
 function App() {
   const[recipes, setRecipes] = useState<RecipesMap>({});
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" exact component={RecipeList} />
             <Route path="/new" component={NewRecipeWrapper} />
             <Route path="/edit/:id" component={EditRecipeWrapper} />
+            <Route path="/404" component={NotFound} />
           </Switch>
         </RecipesContext.Provider>
       </BrowserRouter>
