@@ -18,6 +18,7 @@ export default function EditRecipeWrapper(){
     const onEdit = async (recipe:RecipeModel) => {
         try {
             await updateRecipe(recipe);
+            history.push('/');
         } catch (e) {
             console.log(e);
         }
